@@ -1,0 +1,4 @@
+spring:
+  redis:
+    host: 127.0.0.1:11080
+    password: q7ZtCl^5S3
