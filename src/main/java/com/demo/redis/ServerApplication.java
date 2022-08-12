@@ -1,40 +1,38 @@
 package com.demo.redis;
 
+import org.openjdk.jmh.runner.Runner;
+import org.openjdk.jmh.runner.options.Options;
+import org.openjdk.jmh.runner.options.OptionsBuilder;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
-import org.springframework.data.redis.connection.RedisConnectionFactory;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.serializer.RedisSerializer;
-import org.springframework.data.redis.serializer.StringRedisSerializer;
+import org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration;
+import org.springframework.boot.autoconfigure.data.redis.RedisReactiveAutoConfiguration;
+import org.springframework.boot.autoconfigure.data.redis.RedisRepositoriesAutoConfiguration;
+import org.springframework.context.ConfigurableApplicationContext;
 
 
 /**
  * @author ZhuLiang
  */
-@SpringBootApplication
+@SpringBootApplication(exclude = {
+        RedisReactiveAutoConfiguration.class,
+        RedisAutoConfiguration.class,
+        RedisRepositoriesAutoConfiguration.class,
+})
 public class ServerApplication {
 
-    public static void main(String[] args) {
-        SpringApplication.run(ServerApplication.class, args);
+    public static void main(String[] args) throws Exception {
+        // 使用一个单独进程执行测试，执行5遍warmup，然后执行5遍测试
+//        Options opt = new OptionsBuilder()
+//                .include(ServerBenchmark.class.getSimpleName())
+//                // 输出测试结果的文件
+//                .output("./jmh-map.log")
+//                .build();
+//        new Runner(opt).run();
+
+        ConfigurableApplicationContext context = SpringApplication.run(ServerApplication.class, args);
+        context.stop();
+        System.exit(0);
     }
 
-    /**
-     * 声明一个Bean 这样其他地方可以通过@Autowired获取到生成的 RedisTemplate 对象
-     *
-     * @param factory
-     * @return
-     */
-    @Bean
-    public RedisTemplate<String, String> redisTemplate(RedisConnectionFactory factory) {
-        RedisTemplate<String, String> template = new RedisTemplate<>();
-        // 配置连接工厂
-        template.setConnectionFactory(factory);
-        //设置键值默认序列化方式
-        //RedisTemplate有自己的默认序列化的方式，不过使用默认方式，会在redis客户端查看的时候出现乱码，不便与使用，我们这里用falstjson库
-        RedisSerializer<String> stringSerializer = new StringRedisSerializer();
-        template.setDefaultSerializer(stringSerializer);
-
-        return template;
-    }
 }

@@ -1,0 +1,15 @@
+# JMH version: 1.35
+# VM version: JDK 1.8.0_191, Java HotSpot(TM) 64-Bit Server VM, 25.191-b12
+# VM invoker: C:\Workspaces\Soft\jdk1.8.0_191\jre\bin\java.exe
+# VM options: -XX:TieredStopAtLevel=1 -Xverify:none -Dspring.output.ansi.enabled=always -Dcom.sun.management.jmxremote -Dspring.jmx.enabled=true -Dspring.liveBeansView.mbeanDomain -Dspring.application.admin.enabled=true -javaagent:C:\Users\ZhuLiang\AppData\Local\JetBrains\Toolbox\apps\IDEA-U\ch-0\222.3345.118\lib\idea_rt.jar=64667:C:\Users\ZhuLiang\AppData\Local\JetBrains\Toolbox\apps\IDEA-U\ch-0\222.3345.118\bin -Dfile.encoding=UTF-8
+# Blackhole mode: full + dont-inline hint (auto-detected, use -Djmh.blackhole.autoDetect=false to disable)
+# Warmup: 2 iterations, 10 s each
+# Measurement: 3 iterations, 5 s each
+# Timeout: 10 min per iteration
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Throughput, ops/time
+# Benchmark: com.demo.redis.ServerBenchmark.springLettuceTemplateUserKeys1
+
+# Run progress: 0.00% complete, ETA 00:17:30
+# Fork: 1 of 1
+# Warmup Iteration   1: 
