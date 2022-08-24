@@ -21,7 +21,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 /**
  * @author ZhuLiang
  */
-@Service
+//@Service
 public class RedisBatch {
 
     final static long START_USER_ID = 4611686027042922274L;
